@@ -1,11 +1,11 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from __future__ import annotations
 import os
 import sqlite3
 from pathlib import Path
 from typing import List, Optional, Dict, Any
-
-from fastapi import FastAPI, HTTPException, Depends, Header
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import HTTPException, Depends, Header
 from pydantic import BaseModel, Field
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from datetime import datetime, timedelta
@@ -76,9 +76,8 @@ class ScrapeResultsIn(BaseModel):
 
 
 # ---------- App ----------
-app = FastAPI(title="Leads API (API-only)")
+app = FastAPI()
 
-# CORS for Vercel frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
