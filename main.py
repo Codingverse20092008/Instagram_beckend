@@ -79,13 +79,14 @@ class ScrapeResultsIn(BaseModel):
 app = FastAPI(title="Leads API (API-only)")
 
 # CORS for Vercel frontend
-_origins_env = os.getenv("CORS_ALLOW_ORIGINS", "*")
-origins = [o.strip() for o in _origins_env.split(",") if o.strip()] or ["*"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=False,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_origins=[
+        "https://instagram-leads-frontend.vercel.app",
+        "https://instagram-leads-frontend-2cfwxkfi5-monidipa-khans-projects.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
